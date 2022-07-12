@@ -25,6 +25,7 @@ class SendData
         foreach ($this->data as $post){
             $db->Insert($post['href'],$post['text']);
         }
+        echo 'Sending was successful!';
     }
 
 }

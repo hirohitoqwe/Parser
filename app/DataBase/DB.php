@@ -11,9 +11,7 @@ class DB
 
     public function __construct()
     {
-        $env= new EnvConfig();
-        $info=$env->configure();
-        $this->info=$info;
+        $this->envConfig();
         $this->connection();
     }
 
@@ -21,9 +19,20 @@ class DB
         $this->connection=new \PDO($this->info['driver'].':host='.$this->info['host'].';dbname='.$this->info['dbname'], $this->info['user'], $this->info['password']);
     }
 
+    private function envConfig(){
+        $env= new EnvConfig();
+        $this->info=$env->configure();
+    }
+
     public  function Insert($href,$text){
         $tablename=$this->info['tablename'];
-        $this->connection->query("INSERT INTO $tablename (`href`,`text`) VALUES ('$href','$text')");
+        try {
+            $this->connection->query("INSERT INTO $tablename (`href`,`text`) VALUES ('$href','$text')");
+        }catch (\PDOException $e){
+            echo $e->getMessage();
+        }
     }
+
+
 
 }
