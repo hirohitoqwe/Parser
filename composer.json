@@ -1,0 +1,12 @@
+{
+    "require": {
+        "sunra/php-simple-html-dom-parser": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Component\\": "app/Components",
+            "Model\\": "app/Model",
+            "DataBase\\": "app/DataBase"
+        }
+    }
+}
