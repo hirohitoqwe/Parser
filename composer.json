@@ -1,12 +1,15 @@
 {
     "require": {
-        "sunra/php-simple-html-dom-parser": "^1.5"
+        "sunra/php-simple-html-dom-parser": "^1.5",
+        "vlucas/phpdotenv": "^5.4",
+      "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {
             "Component\\": "app/Components",
             "Model\\": "app/Model",
-            "DataBase\\": "app/DataBase"
+            "DataBase\\": "app/DataBase",
+            "App\\": "app/"
         }
     }
 }
