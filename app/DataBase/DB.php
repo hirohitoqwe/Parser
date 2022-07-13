@@ -3,6 +3,7 @@
 namespace DataBase;
 use Model\Model;
 use Component\EnvConfig;
+use PDO;
 
 class DB
 {
@@ -11,28 +12,20 @@ class DB
 
     public function __construct()
     {
-        $this->envConfig();
-        $this->connection();
+        $this->info=EnvConfig::configure();
+        $info=$this->info;//для лучшей читаемости
+        $this->connection=new PDO(sprintf("%s:host=%s;dbname=%s",$info['driver'],$info['host'],$info['dbname']),$info['user'],$info['password']);
     }
 
-    private  function connection(){
-        $this->connection=new \PDO($this->info['driver'].':host='.$this->info['host'].';dbname='.$this->info['dbname'], $this->info['user'], $this->info['password']);
-    }
-
-    private function envConfig(){
-        $env= new EnvConfig();
-        $this->info=$env->configure();
-    }
-
-    public  function Insert($href,$text){
-        $tablename=$this->info['tablename'];
+    public  function InsertHrefAndText(string $href, string $text){
         try {
-            $this->connection->query("INSERT INTO $tablename (`href`,`text`) VALUES ('$href','$text')");
+            $sth=$this->connection->prepare("INSERT INTO `parser` (`href`,`text`) VALUES (:href,:text)");
+            $sth->bindParam('href',$href,PDO::PARAM_STR);
+            $sth->bindParam('text',$text,PDO::PARAM_STR);
+            $sth->execute();
         }catch (\PDOException $e){
             echo $e->getMessage();
         }
     }
-
-
 
 }

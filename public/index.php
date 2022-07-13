@@ -6,8 +6,6 @@ require_once ROOT.'vendor\autoload.php';
 
 use App\SendData;
 
-$obj=new SendData();
+$sender=new SendData();
 
-$obj->SendData();
-
-?>
+$sender->SaveContent();

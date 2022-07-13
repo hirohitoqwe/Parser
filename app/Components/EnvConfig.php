@@ -4,17 +4,24 @@ namespace Component;
 use Dotenv\Dotenv;
 class EnvConfig
 {
-    public function configure(){
+    private static $info;
+    public static function configure(){
         $dotenv=Dotenv::createImmutable('C:\OpenServer\domains\parser');
         $dotenv->load();
-        $info=[
+        self::$info=[
             'driver'=>$_ENV['DRIVER'],
             'host'=>$_ENV['HOST'],
             'dbname'=>$_ENV['DB_NAME'],
-            'tablename'=>$_ENV['TABLE_NAME'],
             'user'=>$_ENV['USER'],
             'password'=>$_ENV['PASSWORD']
         ];
-        return $info;
+        return self::$info;
     }
+/*
+    public static function getConfig($parametr){
+        self::configure();
+        return self::$info[$parametr];
+    }
+слишком длинные строки
+*/
 }

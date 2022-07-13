@@ -20,10 +20,10 @@ class SendData
         $this->data=$model->ParseContent();
     }
 
-    public function SendData(){
+    public function SaveContent(){
         $db=$this->db;
         foreach ($this->data as $post){
-            $db->Insert($post['href'],$post['text']);
+            $db->InsertHrefAndText($post['href'],$post['text']);
         }
         echo 'Sending was successful!';
     }
