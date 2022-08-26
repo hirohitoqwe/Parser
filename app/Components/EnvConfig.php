@@ -17,11 +17,4 @@ class EnvConfig
         ];
         return self::$info;
     }
-/*
-    public static function getConfig($parametr){
-        self::configure();
-        return self::$info[$parametr];
-    }
-слишком длинные строки
-*/
 }

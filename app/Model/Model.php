@@ -5,9 +5,8 @@ use Sunra\PhpSimple\HtmlDomParser;
 use Component\getHTML;
 
 class Model{
-    public function ParseContent(){
+    public function ParseContent(GetHTML $newHtml){
         $data=[];
-        $newHtml=new GetHtml();
         $html=$newHtml->getHTML();
         foreach ($html->find('.link_CocWY') as $post){
             $href='www.cybersport.ru'.$post->href;

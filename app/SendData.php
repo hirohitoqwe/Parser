@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Component\GetHTML;
 use DataBase\DB;
 use Model\Model;
 
@@ -8,16 +9,16 @@ class SendData
 {
     private $db;
     private $data;
-
-    public  function __construct(){
-        $this->getModelData();
-        $this->db=new DB();
+    private $newHtml;
+    public  function __construct(Model $model,GetHTML $newHtml,DB $db){
+        $this->newHtml=$newHtml;
+        $this->getModelData($model);
+        $this->db=$db;
 
     }
 
-    private function getModelData(){
-        $model=new Model();
-        $this->data=$model->ParseContent();
+    private function getModelData(Model $model){
+        $this->data=$model->ParseContent($this->newHtml);
     }
 
     public function SaveContent(){
